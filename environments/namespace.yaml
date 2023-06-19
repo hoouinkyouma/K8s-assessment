@@ -1,0 +1,48 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: staging
+  labels:
+    name: staging
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: dev1
+  labels:
+    name: dev1
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: dev2
+  labels:
+    name: dev2
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: dev2
+  labels:
+    name: dev2
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: dev3
+  labels:
+    name: dev3
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: dev4
+  labels:
+    name: dev4
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: dev5
+  labels:
+    name: dev5

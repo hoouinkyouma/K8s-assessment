@@ -1,0 +1,77 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+  labels:
+    app: mysql
+    tier: database
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+spec:
+  type: NodePort
+  ports:
+  - port: 3306
+    targetPort: 3306
+    nodePort: 32120
+  selector:
+    app: mysql
+    tier: database
+  
+
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+    tier: database
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+      tier: database
+  serviceName: mysql
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mysql
+        tier: database
+    spec:
+    serviceAccountName: mysql-deployment-sa
+    volumes:
+      - name: secrets-store-inline
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: "mysql-deployment-aws-secrets"
+    containers:
+      - name: mysql
+        image: mysql:8.0
+        resources:
+          limits:
+            memory: "1024Mi"
+            cpu: "1500m"
+        ports:
+          - containerPort: 3306
+            name: mysql
+        volumeMounts:        
+          - name: mysql-persistent-storage
+            mountPath: /var/lib/mysql 
+          - name: secrets-store-inline
+            mountPath: "/mnt/secrets-store"
+            readOnly: true

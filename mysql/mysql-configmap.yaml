@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-configmap
+  namespace: staging
+data:
+  host: mysql
+  dbname: kyouma
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-configmap
+  namespace: dev1
+data:
+  host: mysql
+  dbname: kyouma
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-configmap
+  namespace: dev2
+data:
+  host: mysql
+  dbname: kyouma
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-configmap
+  namespace: dev3
+data:
+  host: mysql
+  dbname: kyouma
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-configmap
+  namespace: dev4
+data:
+  host: mysql
+  dbname: kyouma
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-configmap
+  namespace: dev5
+data:
+  host: mysql
+  dbname: kyouma
