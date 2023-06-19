@@ -8,6 +8,10 @@ There shall not be much dependancies and the applications should work fine.
 --> Assuming that you already have your cluster up and running. Please go to the environment folder and run the namespace.yaml file in your cluster
  **kubectl apply -f namespace.yaml**  This will deploy the different envs like staging and other 5 dev envs.
  
+-->Install helm if you don't already have it installed on your local and run below commands to install secrets store csi driver. Can skip this step if already have it.
+**helm repo add secrets-store-csi-driver https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts**
+**helm install -n kube-system csi-secrets-store secrets-store-csi-driver/secrets-store-csi-driver**
+ 
 --> Make sure you have the aws cli installed and the aws access_key and secret_access_key configured and then run this command:
   aws secretsmanager create-secret --name MySecret --secret-string '{"username":"$username", "password":"$password"}'
 --> a shellscript has been created in my case and saved in mysql folder which has the policy for the secret created.
